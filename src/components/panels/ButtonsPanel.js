@@ -1,26 +1,23 @@
+import BarsControlButton from "../elements/BarsControlButton";
+import selectors from "./ButtonsPanel.module.css";
+
 function ButtonsPanel() {
     return <>
         <h6><i>OR</i></h6>
         <h4>Check number by given bars combination</h4>
 
-        <div class="button-panel left">
-            <div class="editing-button bar-button">
-                <div id="thickButton"></div>
-            </div>
+        <div className={selectors["button-panel"] + " " + selectors["left"]}>
 
-            <div id="lastRemovalButton" class="editing-button">
-                <p>remove last</p>
-            </div>
+            <BarsControlButton className={selectors["editing-button"] + " " + selectors["bar-button"]}><div id={selectors.thickButton}></div></BarsControlButton>
+            <BarsControlButton id={selectors.lastRemovalButton} className={selectors["editing-button"]}><p>remove last</p></BarsControlButton>
+
         </div>
 
-        <div class="button-panel right">
-            <div class="editing-button bar-button">
-                <div id="thinButton"></div>
-            </div>
+        <div className={selectors["button-panel"] + " " + selectors["right"]}>
 
-            <div id="clearButton" class="editing-button">
-                <p>clear</p>
-            </div>
+            <BarsControlButton className={selectors["editing-button"] + " " + selectors["bar-button"]}><div id={selectors.thinButton}></div></BarsControlButton>
+            <BarsControlButton id={selectors.clearButton} className={selectors["editing-button"]}><p>clear</p></BarsControlButton>
+
         </div>
     </>;
 }
