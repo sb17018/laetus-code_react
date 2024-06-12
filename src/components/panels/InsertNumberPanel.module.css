@@ -1,13 +1,31 @@
 #userInputField {
-	width: 80%;
-	height: 40px;
-	color: #777788;
-	text-align: center;
-	font-size: 34px;
-	background-color: #ddddff;
-	outline: 0;
+    width: 80%;
+    height: 40px;
+    margin: 0;
+    text-align: center;
+    font-size: 34px;
+    color: #777788;
+    background-color: #ddddff;
+    outline: 0;
 }
 
-#userInputField:placeholder-shown{
-	font-size: 20px;
+#userInputField:placeholder-shown {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#userInputField::placeholder {
+    color: #bb3300;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
