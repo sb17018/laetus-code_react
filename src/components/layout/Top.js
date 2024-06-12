@@ -1,7 +1,9 @@
+import selectors from "./Top.module.css";
+
 function Top() {
-    return <div id="headerField">
+    return <header id={selectors.headerField}>
         <h3>Welcome to <i>PHARMA CODE</i> generator &copy; Piotr Bar</h3>
-    </div>;
+    </header>;
 }
 
 export default Top;

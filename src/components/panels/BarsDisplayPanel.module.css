@@ -1,0 +1,29 @@
+#barsPlaceholderPanel {
+	width: 320px;
+	margin: 0 auto;
+	z-index: 10;
+}
+
+#barsPlaceholder {
+	margin: 0 auto;
+}
+
+#calculationPlaceholderFrame {
+	height: 60px;
+	font-size: 20px;
+	color: #8f3c1e;
+	margin: 20px 0 10px;
+}
+
+#calculationPlaceholder{
+    padding: 5px 8px;
+    color: #fff;
+    background-color: #bb3300;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+#calculationPlaceholder::after{
+    content: "REQUIRED TWO BARS AT LEAST";
+}
