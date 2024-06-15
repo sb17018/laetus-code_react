@@ -1,5 +1,6 @@
 #userInputField {
-    width: 80%;
+    width: 100%;
+    max-width: 320px;
     height: 40px;
     margin: 0;
     text-align: center;

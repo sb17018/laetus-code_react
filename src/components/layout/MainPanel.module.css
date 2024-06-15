@@ -1,8 +1,9 @@
 #mainField {
 	background-color: rgba(255, 255, 255, 0.8);
-	width: 400px;
+	width: fit-content;
+	min-width: 320px;
 	margin: 20px auto;
-	padding: 20px 0;
+	padding: 20px 40px;
 	text-align: center;
 	border: 2px solid #093d70;
 	z-index: 2;
