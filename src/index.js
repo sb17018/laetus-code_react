@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BarGenerationCtxProvider } from "./js/barGeneration-context";
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BarGenerationCtxProvider>
+    {/* <React.StrictMode> */}
+      <App />
+    {/* </React.StrictMode> */}
+  </BarGenerationCtxProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -42,12 +42,12 @@
 	box-shadow: none;
 }
 
-#lastRemovalButton {
+.remove-last-button {
 	background-color: #c9b027;
 	box-shadow: 2px 2px #554907;
 }
 
-#clearButton {
+.clear-all-button {
 	background-color: #bb2500;
 	box-shadow: 2px 2px #6b1803;
 }
