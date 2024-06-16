@@ -72,32 +72,37 @@ export function BarGenerationCtxProvider(props) {
 
     function generateCodeHandler(codeValue) {
 
-        barsCombination.splice(0, barsCombination.length);
-
-        let GENERATED_BARS_COMBINATION = [];
-        let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
-        let summedBarsValue = Math.pow(2, numberOfBars) - 1;
-        if (codeValue == "") {
-            codeValue = 0;
-            numberOfBars = 0;
-            summedBarsValue = 0;
+        let generatedBarsCombination = [];
+        if (codeValue > 131070) {
+            generatedBarsCombination = [...barsCombination];
         }
+        else {
+            barsCombination.splice(0, barsCombination.length);
 
-        let valueAfterThickening = 0;
-        for (let i = 0; i < numberOfBars; i++) {
-            let barType = "";
-            valueAfterThickening = summedBarsValue + Math.pow(2, numberOfBars - 1 - i);
-
-            if (valueAfterThickening <= codeValue) {
-                barType = "thickButton";
-                summedBarsValue = valueAfterThickening;
+            let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
+            let summedBarsValue = Math.pow(2, numberOfBars) - 1;
+            if (codeValue == "") {
+                codeValue = 0;
+                numberOfBars = 0;
+                summedBarsValue = 0;
             }
-            let newBar = setBarParams(barType);
-            barsCombination.push(newBar);
-            GENERATED_BARS_COMBINATION = [...barsCombination];
+
+            let valueAfterThickening = 0;
+            for (let i = 0; i < numberOfBars; i++) {
+                let barType = "";
+                valueAfterThickening = summedBarsValue + Math.pow(2, numberOfBars - 1 - i);
+
+                if (valueAfterThickening <= codeValue) {
+                    barType = "thickButton";
+                    summedBarsValue = valueAfterThickening;
+                }
+                let newBar = setBarParams(barType);
+                barsCombination.push(newBar);
+                generatedBarsCombination = [...barsCombination];
+            }
         }
         barsCalculatedValue = codeValue;
-        setBarsCombination((currentBarsCombination) => { return GENERATED_BARS_COMBINATION });
+        setBarsCombination((currentBarsCombination) => { return generatedBarsCombination });
     }
 
     const context = {

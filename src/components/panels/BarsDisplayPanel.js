@@ -6,6 +6,8 @@ import selectors from "./BarsDisplayPanel.module.css";
 
 function BarsDisplayPanel() {
 
+    const MAX_VALUE = 131070;
+
     const barsCombCtx = useContext(BarGenerationCtx);
 
     // all existing bars parameters array
@@ -19,7 +21,7 @@ function BarsDisplayPanel() {
 
     const BARS_TO_DISPLAY = [];
     barsParams.forEach((elem, index) => {
-        BARS_TO_DISPLAY.push(<Bar key={index} position={elem.position} width={elem.value} />);
+        BARS_TO_DISPLAY.push(<Bar key={index} position={elem.position} width={elem.value} color={barsValue > MAX_VALUE ? "grey" : "black"} />);
     });
 
 
@@ -27,7 +29,7 @@ function BarsDisplayPanel() {
         <svg xmlns="http://www.w3.org/2000/svg" className={selectors["bars-placeholder"]} id="barsPlaceholder" style={{ width: barCodeCurrenWidth() + "px" }}>
             {BARS_TO_DISPLAY}
         </svg>
-        <div id={selectors.calculationPlaceholderFrame}><output id={selectors.calculationPlaceholder} className={barsValue > 2 ? barsValue > 131070 ? selectors["to-great-number"] : selectors["code-number"] : ""}>{barsValue > 2 ? barsValue <= 131070 ? barsValue : "" : ""}</output></div>
+        <div id={selectors.calculationPlaceholderFrame}><output id={selectors.calculationPlaceholder} className={barsValue > 2 ? barsValue > MAX_VALUE ? selectors["to-great-number"] : selectors["code-number"] : ""}>{barsValue > 2 ? barsValue <= MAX_VALUE ? barsValue : "" : ""}</output></div>
     </div>;
 }
 
