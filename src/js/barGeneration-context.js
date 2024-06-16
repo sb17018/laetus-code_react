@@ -12,42 +12,42 @@ const BarGenerationCtx = createContext({
     enterNextBar: () => { },
     removeLastBar: () => { },
     removeAllBars: () => { },
+    generateCode: () => { },
 });
 
 let barsCalculatedValue = 0;
 
 export function BarGenerationCtxProvider(props) {
     const [barsCombination, setBarsCombination] = useState([]);
-    // const [barsCalculatedValue, setbarsCalculatedValue] = useState(0);
 
     // to add a bar
     function enterNextBarHandler(barType) {
         if (barsCombination.length < 16) {
-
-            let widthValue = context.modul;
-            let barPosition = 0;
-            let isThick = false;
-
-            barsCalculatedValue = context.barsValue * 2 + 1;
-
-            if (barType == "thickButton") {
-                widthValue *= 2;
-                isThick = true;
-                barsCalculatedValue++;
-            }
-
-            if (barsCombination.length > 0) {
-                barPosition =
-                    barsCombination[barsCombination.length - 1].value +
-                    barsCombination[barsCombination.length - 1].position + context.modul;
-            }
-
-            let newBar = { value: widthValue, position: barPosition, thick: isThick };
+            let newBar = setBarParams(barType);
             setBarsCombination((currentBarsCombination) => { return currentBarsCombination.concat(newBar) });
         }
-        console.log(barsCombination);
-        console.log(barsCalculatedValue);
     };
+
+    function setBarParams(barType) {
+        let widthValue = context.modul;
+        let barPosition = 0;
+        let isThick = false;
+
+        barsCalculatedValue = context.barsValue * 2 + 1;
+
+        if (barType == "thickButton") {
+            widthValue *= 2;
+            isThick = true;
+            barsCalculatedValue++;
+        }
+
+        if (barsCombination.length > 0) {
+            barPosition =
+                barsCombination[barsCombination.length - 1].value +
+                barsCombination[barsCombination.length - 1].position + context.modul;
+        }
+        return { value: widthValue, position: barPosition, thick: isThick };
+    }
 
     // to remove a last bar
     function removeLastBarHandler() {
@@ -56,14 +56,10 @@ export function BarGenerationCtxProvider(props) {
             let lastBar = currentBarsCombination.pop();
             if (lastBar.thick) {
                 --barsCalculatedValue;
-                
             }
             barsCalculatedValue = (--barsCalculatedValue) / 2;
             setBarsCombination(() => currentBarsCombination);
-            // setBarsCombination(currentBarsCombination => { return currentBarsCombination.slice(0, -1) });
         }
-        console.log(barsCombination);
-        // console.log(barsCalculatedValue);
     };
 
     // to remove all bars
@@ -72,8 +68,35 @@ export function BarGenerationCtxProvider(props) {
             barsCalculatedValue = 0;
             setBarsCombination(() => []);
         }
-        console.log(barsCombination);
     };
+
+    function generateCodeHandler(codeValue) {
+        setBarsCombination((currentBarsCombination)=>[]);
+        let GENERATED_BARS_COMBINATION = [];
+        let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
+        let summedBarsValue = Math.pow(2, numberOfBars) - 1;
+        if (codeValue == "") {
+            codeValue = 0;
+            numberOfBars = 0;
+            summedBarsValue = 0;
+        }
+
+        let valueAfterThickening = 0;
+        for (let i = 0; i < numberOfBars; i++) {
+            let barType = "";
+            valueAfterThickening = summedBarsValue + Math.pow(2, numberOfBars - 1 - i);
+
+            if (valueAfterThickening <= codeValue) {
+                barType = "thickButton";
+                summedBarsValue = valueAfterThickening;
+            }
+            let newBar = setBarParams(barType);
+            barsCombination.push(newBar);
+            GENERATED_BARS_COMBINATION = [...barsCombination];
+        }
+        barsCalculatedValue = summedBarsValue;
+        setBarsCombination((currentBarsCombination) => { return GENERATED_BARS_COMBINATION });
+    }
 
     const context = {
         codeFieldWidth: 300,
@@ -86,6 +109,7 @@ export function BarGenerationCtxProvider(props) {
         enterNextBar: enterNextBarHandler,
         removeLastBar: removeLastBarHandler,
         removeAllBars: removeAllBarsHandler,
+        generateCode: generateCodeHandler,
     };
     return <BarGenerationCtx.Provider value={context}>{props.children}</BarGenerationCtx.Provider>;
 };

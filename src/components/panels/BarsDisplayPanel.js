@@ -12,13 +12,18 @@ function BarsDisplayPanel() {
     const barsParams = barsCombCtx.eachBarParams;
 
     const barsValue = barsCombCtx.barsValue;
+    console.log("barsValue on display = " + barsValue);
+    console.log("barsParams on display = " + barsParams);
 
     function barCodeCurrenWidth() {
         return barsParams.length > 0 ? barsParams[barsParams.length - 1].position + barsParams[barsParams.length - 1].value : 0;
     }
 
     const BARS_TO_DISPLAY = [];
-    barsParams.forEach((elem, index) => BARS_TO_DISPLAY.push(<Bar key={index} position={elem.position} width={elem.value} />));
+    barsParams.forEach((elem, index) => {
+        console.log("position = " + elem.position + " width = " + elem.value);
+        BARS_TO_DISPLAY.push(<Bar key={index} position={elem.position} width={elem.value} />);
+    });
 
 
     return <div id={selectors.barsPlaceholderPanel}>

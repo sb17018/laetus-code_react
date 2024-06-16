@@ -10,12 +10,12 @@
     outline: 0;
 }
 
-#userInputField:placeholder-shown {
+#userInputField:placeholder-shown, .code-number {
     font-size: 20px;
     font-weight: bold;
 }
 
-#userInputField::placeholder {
+#userInputField::placeholder, .code-number {
     color: #bb3300;
 }
 
