@@ -71,7 +71,15 @@ export function BarGenerationCtxProvider(props) {
     };
 
     function generateCodeHandler(codeValue) {
-        setBarsCombination((currentBarsCombination)=>[]);
+        // to empty constant array (which cannot be re-asigned)
+        if(codeValue > 131070){
+            barsCalculatedValue = codeValue;
+            console.log("context.barsValue = " + context.barsValue);
+            return;
+        }
+        
+        barsCombination.splice(0, barsCombination.length);
+
         let GENERATED_BARS_COMBINATION = [];
         let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
         let summedBarsValue = Math.pow(2, numberOfBars) - 1;
