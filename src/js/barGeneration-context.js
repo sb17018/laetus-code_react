@@ -71,13 +71,7 @@ export function BarGenerationCtxProvider(props) {
     };
 
     function generateCodeHandler(codeValue) {
-        // to empty constant array (which cannot be re-asigned)
-        if(codeValue > 131070){
-            barsCalculatedValue = codeValue;
-            console.log("context.barsValue = " + context.barsValue);
-            return;
-        }
-        
+
         barsCombination.splice(0, barsCombination.length);
 
         let GENERATED_BARS_COMBINATION = [];
@@ -102,7 +96,7 @@ export function BarGenerationCtxProvider(props) {
             barsCombination.push(newBar);
             GENERATED_BARS_COMBINATION = [...barsCombination];
         }
-        barsCalculatedValue = summedBarsValue;
+        barsCalculatedValue = codeValue;
         setBarsCombination((currentBarsCombination) => { return GENERATED_BARS_COMBINATION });
     }
 

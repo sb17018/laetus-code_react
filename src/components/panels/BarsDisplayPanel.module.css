@@ -28,6 +28,10 @@
     content: "REQUIRED TWO BARS AT LEAST";
 }
 
+#calculationPlaceholder.to-great-number::after{
+    content: "TOO GREAT NUMBER";
+}
+
 #calculationPlaceholder.code-number{
 	color: #bb3300;
     background-color: transparent;

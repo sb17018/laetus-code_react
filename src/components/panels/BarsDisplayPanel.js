@@ -12,8 +12,6 @@ function BarsDisplayPanel() {
     const barsParams = barsCombCtx.eachBarParams;
 
     const barsValue = barsCombCtx.barsValue;
-    console.log("barsValue on display = " + barsValue);
-    console.log("barsParams on display = " + barsParams);
 
     function barCodeCurrenWidth() {
         return barsParams.length > 0 ? barsParams[barsParams.length - 1].position + barsParams[barsParams.length - 1].value : 0;
@@ -21,7 +19,6 @@ function BarsDisplayPanel() {
 
     const BARS_TO_DISPLAY = [];
     barsParams.forEach((elem, index) => {
-        console.log("position = " + elem.position + " width = " + elem.value);
         BARS_TO_DISPLAY.push(<Bar key={index} position={elem.position} width={elem.value} />);
     });
 
@@ -30,7 +27,7 @@ function BarsDisplayPanel() {
         <svg xmlns="http://www.w3.org/2000/svg" className={selectors["bars-placeholder"]} id="barsPlaceholder" style={{ width: barCodeCurrenWidth() + "px" }}>
             {BARS_TO_DISPLAY}
         </svg>
-        <div id={selectors.calculationPlaceholderFrame}><output id={selectors.calculationPlaceholder} className={barsValue > 2 ? selectors["code-number"] : ""}>{barsValue > 2 ? barsValue : ""}</output></div>
+        <div id={selectors.calculationPlaceholderFrame}><output id={selectors.calculationPlaceholder} className={barsValue > 2 ? barsValue > 131070 ? selectors["to-great-number"] : selectors["code-number"] : ""}>{barsValue > 2 ? barsValue <= 131070 ? barsValue : "" : ""}</output></div>
     </div>;
 }
 
