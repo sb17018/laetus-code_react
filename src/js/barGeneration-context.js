@@ -87,15 +87,8 @@ export function BarGenerationCtxProvider(props) {
     function generateCodeHandler(codeValue) {
 
         let generatedBarsCombination = [];
-<<<<<<< HEAD
         isBarsValueTooHigh = false;
         if (codeValue <= MAX_VALUE) {
-=======
-        if (codeValue > 131070) {
-            generatedBarsCombination = [...barsCombination];
-        }
-        else {
->>>>>>> development
             barsCombination.splice(0, barsCombination.length);
 
             let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
@@ -104,7 +97,6 @@ export function BarGenerationCtxProvider(props) {
                 codeValue = 0;
                 numberOfBars = 0;
                 summedBarsValue = 0;
-<<<<<<< HEAD
             }
 
             let valueAfterThickening = 0;
@@ -126,26 +118,6 @@ export function BarGenerationCtxProvider(props) {
         }
         generatedBarsCombination = [...barsCombination];
         setBarsCombination(() => { return generatedBarsCombination });
-=======
-            }
-
-            let valueAfterThickening = 0;
-            for (let i = 0; i < numberOfBars; i++) {
-                let barType = "";
-                valueAfterThickening = summedBarsValue + Math.pow(2, numberOfBars - 1 - i);
-
-                if (valueAfterThickening <= codeValue) {
-                    barType = "thickButton";
-                    summedBarsValue = valueAfterThickening;
-                }
-                let newBar = setBarParams(barType);
-                barsCombination.push(newBar);
-                generatedBarsCombination = [...barsCombination];
-            }
-        }
-        barsCalculatedValue = codeValue;
-        setBarsCombination((currentBarsCombination) => { return generatedBarsCombination });
->>>>>>> development
     }
 
     const context = {
