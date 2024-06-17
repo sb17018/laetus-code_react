@@ -1,22 +1,58 @@
 #userInputField {
-    width: 100%;
-    max-width: 320px;
-    height: 40px;
-    margin: 0;
-    text-align: center;
-    font-size: 34px;
-    color: #777788;
-    background-color: #ddddff;
-    outline: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 40px;
+  margin: 0;
+  text-align: center;
+  font-size: 34px;
+  color: #777788;
+  background-color: #ddddff;
+  outline: 0;
 }
 
-#userInputField:placeholder-shown, .code-number {
-    font-size: 20px;
-    font-weight: bold;
+#userInputField:placeholder-shown,
+.code-number {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-#userInputField::placeholder, .code-number {
-    color: #bb3300;
+#userInputField::placeholder,
+.code-number {
+  color: #bb3300;
+}
+
+.too-great-number,
+.too-little-number {
+  padding: 5px 8px;
+  color: #fff;
+  background-color: #bb3300;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.too-great-number {
+  height: 0;
+  animation-name: greatNumberPrompt;
+  animation-duration: .5s;
+}
+
+@keyframes greatNumberPrompt {
+  0% {
+    height: 0;
+  }
+
+  100% {
+    height: 18px;
+  }
+}
+
+.too-great-number::after {
+  content: "TOO GREAT NUMBER";
+}
+
+.too-little-number::after {
+  content: "REQUIRED MINIMAL VALUE 3";
 }
 
 /* Chrome, Safari, Edge, Opera */
