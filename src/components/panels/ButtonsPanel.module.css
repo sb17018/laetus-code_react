@@ -36,9 +36,6 @@
 
 .editing-button:active {
 	opacity: 0.5;
-}
-
-.editing-button:active {
 	box-shadow: none;
 }
 

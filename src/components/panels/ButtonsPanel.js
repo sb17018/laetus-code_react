@@ -3,14 +3,7 @@ import selectors from "./ButtonsPanel.module.css";
 
 function ButtonsPanel() {
 
-    function print(){
-        console.log("A");
-    }
-
     return <>
-        <h6><i>OR</i></h6>
-        <h4>Check number by given bars combination</h4>
-
         <div className={selectors["button-panel"] + " " + selectors["left"]}>
 
             <BarsControlButton className={selectors["editing-button"] + " " + selectors["bar-button"]} id="thickButton"><div id={selectors.thickButton}></div></BarsControlButton>
