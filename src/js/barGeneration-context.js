@@ -14,6 +14,8 @@ const BarGenerationCtx = createContext({
     removeLastBar: () => { },
     removeAllBars: () => { },
     generateCode: () => { },
+    setPrompt: () => { },
+    prompt: false,
 });
 
 let barsCalculatedValue = 0;
@@ -21,8 +23,18 @@ let isBarsValueTooHigh = false;
 
 export function BarGenerationCtxProvider(props) {
     const [barsCombination, setBarsCombination] = useState([]);
+    const [upperPrompt, setUpperPrompt] = useState(false);
 
     const MAX_VALUE = 131070;
+
+    function setPromptHandler(codeValue){
+        if(codeValue > MAX_VALUE){
+            setUpperPrompt(true);
+        }
+        else{
+            setUpperPrompt(false);
+        }
+    }
 
     // to add a bar
     function enterNextBarHandler(barType) {
@@ -133,6 +145,8 @@ export function BarGenerationCtxProvider(props) {
         removeLastBar: removeLastBarHandler,
         removeAllBars: removeAllBarsHandler,
         generateCode: generateCodeHandler,
+        setPrompt: setPromptHandler,
+        prompt: upperPrompt,
     };
     return <BarGenerationCtx.Provider value={context}>{props.children}</BarGenerationCtx.Provider>;
 };
