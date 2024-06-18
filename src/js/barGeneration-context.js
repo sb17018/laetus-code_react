@@ -9,7 +9,8 @@ const BarGenerationCtx = createContext({
 
     eachBarParams: [],
     barsValue: 0,
-    isValueTooHigh: false,
+    // isValueTooHigh: false,
+    isValueTooHigh: howManyTooHigh,
     enterNextBar: () => { },
     removeLastBar: () => { },
     removeAllBars: () => { },
@@ -17,10 +18,11 @@ const BarGenerationCtx = createContext({
 });
 
 let barsCalculatedValue = 0;
-let isBarsValueTooHigh = false;
+// let isBarsValueTooHigh = false;
 
 export function BarGenerationCtxProvider(props) {
     const [barsCombination, setBarsCombination] = useState([]);
+    const [howManyTooHigh, setHowManyTooHigh] = useState(0);
 
     const MAX_VALUE = 131070;
 
@@ -29,10 +31,12 @@ export function BarGenerationCtxProvider(props) {
         if (barsCombination.length < 16) {
             let newBar = setBarParams(barType);
             barsCombination.push(newBar);
-            isBarsValueTooHigh = false;
+            // isBarsValueTooHigh = false;
+            setHowManyTooHigh(() => 0);
         }
-        else{
-            isBarsValueTooHigh = true;
+        else {
+            // isBarsValueTooHigh = true;
+            setHowManyTooHigh(currentValue => ++currentValue);
         }
         let generatedBarsCombination = [...barsCombination];
         setBarsCombination(() => { return generatedBarsCombination });
@@ -62,7 +66,8 @@ export function BarGenerationCtxProvider(props) {
     // to remove a last bar
     function removeLastBarHandler() {
         if (barsCalculatedValue < MAX_VALUE) {
-            isBarsValueTooHigh = false;
+            // isBarsValueTooHigh = false;
+            setHowManyTooHigh(() => 0);
         }
         if (barsCombination.length > 0) {
             let lastBar = barsCombination.pop();
@@ -78,7 +83,8 @@ export function BarGenerationCtxProvider(props) {
     // to remove all bars
     function removeAllBarsHandler() {
         if (barsCombination.length > 0) {
-            isBarsValueTooHigh = false;
+            // isBarsValueTooHigh = false;
+            setHowManyTooHigh(() => 0);
             barsCalculatedValue = 0;
             setBarsCombination(() => []);
         }
@@ -87,7 +93,8 @@ export function BarGenerationCtxProvider(props) {
     function generateCodeHandler(codeValue) {
 
         let generatedBarsCombination = [];
-        isBarsValueTooHigh = false;
+        // isBarsValueTooHigh = false;
+        setHowManyTooHigh(() => 0);
         if (codeValue <= MAX_VALUE) {
             barsCombination.splice(0, barsCombination.length);
 
@@ -113,8 +120,9 @@ export function BarGenerationCtxProvider(props) {
             }
             barsCalculatedValue = codeValue;
         }
-        else{
-            isBarsValueTooHigh = true;
+        else {
+            // isBarsValueTooHigh = true;
+            setHowManyTooHigh(currentValue => ++currentValue);
         }
         generatedBarsCombination = [...barsCombination];
         setBarsCombination(() => { return generatedBarsCombination });
@@ -128,7 +136,8 @@ export function BarGenerationCtxProvider(props) {
         modul: 10,
         eachBarParams: barsCombination,
         barsValue: barsCalculatedValue,
-        isValueTooHigh: isBarsValueTooHigh,
+        // isValueTooHigh: isBarsValueTooHigh,
+        isValueTooHigh: howManyTooHigh,
         enterNextBar: enterNextBarHandler,
         removeLastBar: removeLastBarHandler,
         removeAllBars: removeAllBarsHandler,

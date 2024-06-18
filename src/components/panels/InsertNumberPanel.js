@@ -16,26 +16,42 @@ function InsertNumberPanel() {
         barsCombCtx.generateCode(event.target.value);
     }
 
-    let outputClass = "";
+    let upperPropmt = <output id={selectors.lessThan3Prompt}></output>
+
     if (barsValue > 0 && barsValue < 3) {
-        outputClass = selectors["too-little-number"];
+        upperPropmt = <output id={selectors.lessThan3Prompt} className={selectors["too-little-number"]}></output>;
     }
     else if (isTooHigh) {
-        outputClass = selectors["too-great-number"];
+        upperPropmt = <output id={selectors.lessThan3Prompt} className={selectors["too-great-number"]} onAnimationEnd={fadePromptOut}></output>;
     }
 
-    function fadePromptOut(event){
+
+    function fadePromptOut(event) {
         console.log(event.target);
-        if(isTooHigh) setTimeout(() => event.target.className = "", 3000);
+        if (isTooHigh) setTimeout(() => event.target.className = "", 3000);
     }
+
+    // let outputClass = "";
+    // if (barsValue > 0 && barsValue < 3) {
+    //     outputClass = selectors["too-little-number"];
+    // }
+    // else if (isTooHigh) {
+    //     outputClass = selectors["too-great-number"];
+    // }
+
+    // function fadePromptOut(event){
+    //     console.log(event.target);
+    //     if(isTooHigh) setTimeout(() => event.target.className = "", 3000);
+    // }
+
 
     return <div>
         <h4>Enter a number to generate code</h4>
         <div id="toEnterNumber">
             <input type="number" id={selectors.userInputField} placeholder="REQUIRED MINIMAL VALUE 3" value={barsValue > 0 ? barsValue : ""} onCopy={() => false} onChange={displaySth} />
         </div>
-        <br/>
-        <output id={selectors.lessThan3Prompt} className={outputClass} onAnimationEnd={fadePromptOut}></output>
+        <br />
+        {upperPropmt}
     </div>;
 }
 
