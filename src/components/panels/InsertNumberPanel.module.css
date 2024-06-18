@@ -52,7 +52,7 @@
 }
 
 .too-little-number::after {
-  content: "REQUIRED MINIMAL VALUE 3";
+  content: "REQUIRED MINIMAL VALUE OF 3";
 }
 
 /* Chrome, Safari, Edge, Opera */

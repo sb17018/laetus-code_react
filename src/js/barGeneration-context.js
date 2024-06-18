@@ -14,25 +14,54 @@ const BarGenerationCtx = createContext({
     removeLastBar: () => { },
     removeAllBars: () => { },
     generateCode: () => { },
+    howManyTimesTooHigh: 0,
+    setPrompt: () => { },
+    upperPrompt: "",
 });
 
 let barsCalculatedValue = 0;
 let isBarsValueTooHigh = false;
 
+// let howManyTimesEnteredTooHighValueHandler = 0;
+
 export function BarGenerationCtxProvider(props) {
     const [barsCombination, setBarsCombination] = useState([]);
+    const [tooHighPrompt, setTooHighPrompt] = useState("");
+    const [howManyTimesTooHighValue, setHowManyTimesTooHighValue] = useState(0);
+
 
     const MAX_VALUE = 131070;
 
+    function setPrompt(howManyTooHigh) {
+        if (howManyTooHigh > 0) {
+            setTooHighPrompt("too-great-number");
+        }
+        else {
+            setTooHighPrompt("");
+        }
+    }
+
+    function setNumberOfTooHigh(codeValue) {
+        if (codeValue > MAX_VALUE) {
+            setHowManyTimesTooHighValue(currentValue => ++currentValue);
+        }
+        else {
+            setHowManyTimesTooHighValue(() => 0);
+        }
+    }
+
     // to add a bar
     function enterNextBarHandler(barType) {
+        isBarsValueTooHigh = false;
+        let newBar = setBarParams(barType);
         if (barsCombination.length < 16) {
-            let newBar = setBarParams(barType);
             barsCombination.push(newBar);
-            isBarsValueTooHigh = false;
         }
-        else{
+        else {
             isBarsValueTooHigh = true;
+            let tempBarsCalculatedValue = context.barsValue * 2 + 1;
+            setNumberOfTooHigh(tempBarsCalculatedValue);
+            setTooHighPrompt("too-great-number");
         }
         let generatedBarsCombination = [...barsCombination];
         setBarsCombination(() => { return generatedBarsCombination });
@@ -61,9 +90,8 @@ export function BarGenerationCtxProvider(props) {
 
     // to remove a last bar
     function removeLastBarHandler() {
-        if (barsCalculatedValue < MAX_VALUE) {
-            isBarsValueTooHigh = false;
-        }
+        isBarsValueTooHigh = false;
+
         if (barsCombination.length > 0) {
             let lastBar = barsCombination.pop();
             if (lastBar.thick) {
@@ -71,6 +99,8 @@ export function BarGenerationCtxProvider(props) {
             }
             barsCalculatedValue = (--barsCalculatedValue) / 2;
             let generatedBarsCombination = [...barsCombination];
+            setNumberOfTooHigh(barsCalculatedValue);
+            setTooHighPrompt("");
             setBarsCombination(() => generatedBarsCombination);
         }
     };
@@ -80,6 +110,8 @@ export function BarGenerationCtxProvider(props) {
         if (barsCombination.length > 0) {
             isBarsValueTooHigh = false;
             barsCalculatedValue = 0;
+            setNumberOfTooHigh(barsCalculatedValue);
+            setTooHighPrompt("");
             setBarsCombination(() => []);
         }
     };
@@ -87,7 +119,9 @@ export function BarGenerationCtxProvider(props) {
     function generateCodeHandler(codeValue) {
 
         let generatedBarsCombination = [];
+
         isBarsValueTooHigh = false;
+        console.log(codeValue)
         if (codeValue <= MAX_VALUE) {
             barsCombination.splice(0, barsCombination.length);
 
@@ -113,8 +147,10 @@ export function BarGenerationCtxProvider(props) {
             }
             barsCalculatedValue = codeValue;
         }
-        else{
+        else {
             isBarsValueTooHigh = true;
+            setNumberOfTooHigh(barsCalculatedValue);
+            setTooHighPrompt("too-great-number");
         }
         generatedBarsCombination = [...barsCombination];
         setBarsCombination(() => { return generatedBarsCombination });
@@ -133,6 +169,9 @@ export function BarGenerationCtxProvider(props) {
         removeLastBar: removeLastBarHandler,
         removeAllBars: removeAllBarsHandler,
         generateCode: generateCodeHandler,
+        howManyTimesTooHigh: howManyTimesTooHighValue,
+        setPrompt: setPrompt,
+        upperPrompt: tooHighPrompt,
     };
     return <BarGenerationCtx.Provider value={context}>{props.children}</BarGenerationCtx.Provider>;
 };
