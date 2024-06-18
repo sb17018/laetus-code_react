@@ -4,16 +4,23 @@ import BarGenerationCtx from "../../js/barGeneration-context";
 function BarsControlButton(props) {
 
     const barsCombCtx = useContext(BarGenerationCtx);
-    
-    function manipulateBars(){
-        switch(props.id){
+
+    const barsValue = barsCombCtx.barsValue;
+
+    function manipulateBars() {
+        switch (props.id) {
             case "thickButton":
-            case "thinButton": barsCombCtx.enterNextBar(props.id);
-            break;
+                barsCombCtx.enterNextBar(props.id);
+                barsCombCtx.setPrompt(barsValue * 2 + 2);
+                break;
+            case "thinButton":
+                barsCombCtx.enterNextBar(props.id);
+                barsCombCtx.setPrompt(barsValue * 2 + 1);
+                break;
             case "removeLastBarButton": barsCombCtx.removeLastBar();
-            break;
+                break;
             case "clearAllBarsButton": barsCombCtx.removeAllBars();
-            break;
+                break;
         }
     }
 

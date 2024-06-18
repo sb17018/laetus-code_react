@@ -24,7 +24,7 @@ function InsertNumberPanel() {
         upperPropmt = <output id={selectors.lessThan3Prompt} className={selectors["too-great-number"]} onAnimationEnd={fadePromptOut}></output>;
     }
 
-    function fadePromptOut(event) {
+    function fadePromptOut() {
         setTimeout(() => barsCombCtx.setPrompt(barsValue), 3000);
     }
 
