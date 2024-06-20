@@ -1,0 +1,16 @@
+label div, label input, .radio-wrapper{
+    width: fit-content;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+label p{
+    line-height: 5px;
+}
+
+.radio-wrapper{
+    width: 90px;
+    margin: 5px;
+    padding: 3px;
+    background-color: #e3edf7;
+}

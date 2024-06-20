@@ -1,29 +1,33 @@
 .printing-button {
-	width: 80%;
+	width: 90%;
 	height: 40px;
 	margin: 10px auto;
 	padding: 2px;
 	text-align: center;
 	font-size: 20px;
 	color: #fff;
-    background-color: #093d70;
-	box-shadow: 2px 2px #032547;
+	background-color: #b8b9b8;
+	box-shadow: 2px 2px #767776;
 	border: 0;
 	outline: 0;
-	cursor: pointer;
 }
 
+.printing-button.print-button-active {
+    background-color: #093d70;
+	box-shadow: 2px 2px #032547;
+	cursor: pointer;
+}
 
 .printing-button p {
 	line-height: 40px;
 	margin: 0;
 }
 
-.printing-button:hover {
+.printing-button.print-button-active:hover {
 	opacity: 0.8;
 }
 
-.printing-button:active {
+.printing-button.print-button-active:active {
 	opacity: 0.5;
     box-shadow: none;
 }

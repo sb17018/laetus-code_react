@@ -14,20 +14,18 @@ function MainPanel() {
 
     const barsValue = barsCombCtx.barsValue;
 
-    let printPanel = undefined;
+    let printPanelClass = "";
     if (barsValue > 2 && barsValue <= 131070) {
-        printPanel = <><hr /><PrintPanel /></>;
+        printPanelClass = <PrintPanel className="panel-visible"/>
     }
 
     return <>
         <main id={selectors.mainField}>
             <InsertNumberPanel />
-            <br />
             <hr />
             <BarsDisplayPanel />
-            <hr />
             <ButtonsPanel />
-            {printPanel}
+            <PrintPanel className={printPanelClass}/>
         </main>
     </>
 }

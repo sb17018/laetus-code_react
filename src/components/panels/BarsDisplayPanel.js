@@ -45,8 +45,6 @@ function BarsDisplayPanel() {
             </svg>
             <div id={selectors.calculationPlaceholderFrame}><output id={selectors.calculationPlaceholder} className={barsValue > 2 ? barsValue > MAX_VALUE ? selectors["to-great-number"] : selectors["code-number"] : ""}>{barsValue > 2 ? barsValue <= MAX_VALUE ? barsValue : "" : ""}</output></div>
         </div>
-        <h6><i>OR</i></h6>
-        <h4>Check number by given bars combination</h4>
     </div>;
 }
 

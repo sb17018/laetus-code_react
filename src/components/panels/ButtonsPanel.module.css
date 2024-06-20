@@ -1,3 +1,31 @@
+#buttonPanelWrapper {
+	position: relative;
+	padding-top: 20px;
+}
+
+#divisionLineLeft,
+#divisionLineRight {
+	width: 45%;
+	position: absolute;	
+	/* top: 4px; */
+}
+
+#divisionLineLeft {
+	left: 0;
+}
+
+#divisionLineRight {
+	right: 0;
+}
+
+#connectorOR {
+	position: absolute;
+	margin: 3px 0;
+	padding: 0 5px;
+	font-weight: bold;
+	left: calc(50% - 15px);
+}
+
 .button-panel {
 	width: 40%;
 	display: inline-block;
