@@ -8,18 +8,5 @@ const InputRadio = forwardRef((props, ref) => <div className={selectors["radio-w
 </div>
 );
 
-
-// function CodeModuleOption(props) {
-
-
-
-//     return <div className={selectors["radio-wrapper"]}>
-//         <label htmlFor={props.id}><div><p>{props.codeType}</p><p>{"(" + props.codeMeasure + ")"}</p></div></label>
-//         <InputRadio type="radio" id={props.id} name="codeModuleOption" value={props.value} defaultChecked={props.isChecked}/>
-//         {/* <input type="radio" id={props.id} name="codeModuleOption" value={props.value} defaultChecked={props.isChecked} /> */}
-//     </div>;
-// }
-
-// export default CodeModuleOption;
 export default InputRadio;
 

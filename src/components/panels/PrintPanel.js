@@ -1,8 +1,7 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext } from "react";
 import BarGenerationCtx from "../../js/barGeneration-context";
 
-import BarsPrintButton from "../elements/BarsPrintButton";
-import CodeModuleOption from "../elements/CodeModuleOption";
+import Button from "../elements/Button";
 import InputRadio from "../elements/CodeModuleOption";
 
 import selectors from "./PrintPanel.module.css";
@@ -12,18 +11,15 @@ function PrintPanel(props) {
     const MAX_VALUE = 131070;
 
     const barsCombCtx = useContext(BarGenerationCtx);
-
     const barsValue = barsCombCtx.barsValue;
 
     const ref = useRef();
 
-    const [chosenRadioValue, setChosenRadioValue] = useState("STANDARD");
-    
+    let codeSizeChosen = "STANDARD";
     function checkValue(event) {
         console.log(event.target.value);
-        setChosenRadioValue(()=>event.target.value);
+        codeSizeChosen = event.target.value;
     }
-
 
     let barCodeSettings = "";
     let barsPrintButtonClass = "";
@@ -33,13 +29,31 @@ function PrintPanel(props) {
             <InputRadio ref={ref} id="codeMini" name="codeSize" data-code-type="Mini" value="MINI" data-code-measure="0.375" className={selectors["code-module-checkbox"]} onChange={checkValue} />
             <InputRadio ref={ref} id="codeStandard" name="codeSize" data-code-type="Standard" value="STANDARD" data-code-measure="0.500" className={selectors["code-module-checkbox"]} onChange={checkValue} defaultChecked="true" />
         </>;
-        barsPrintButtonClass = "print-button-active";
+        barsPrintButtonClass = selectors["print-button-active"];
     }
 
+    function clickFunction(ev) {
+        ev.preventDefault();
+
+        console.log(codeSizeChosen + " " + barsValue);
+
+        fetch("http://localhost:8080/code",
+            {
+                mode: "no-cors",
+                method: "POST",
+                body: codeSizeChosen + "," + barsValue,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+    }
     return <div className={selectors["print-panel"] + " " + selectors[props.className]}>
-        <hr />
-        {barCodeSettings}
-        <BarsPrintButton class={barsPrintButtonClass} codeValue={chosenRadioValue} />
+        <form onSubmit={clickFunction}>
+            <hr />
+            {barCodeSettings}
+            <Button id={selectors.printingButton} className={barsPrintButtonClass}><p>PRINT</p></Button>
+        </form>
     </div>;
 }
 

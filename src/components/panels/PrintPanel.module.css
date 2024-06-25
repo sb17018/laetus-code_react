@@ -26,3 +26,37 @@
 .code-module-checkbox{
     display: inline-block;
 }
+
+#printingButton {
+	width: 90%;
+	height: 40px;
+	margin: 10px auto;
+	padding: 2px;
+	text-align: center;
+	font-size: 20px;
+	color: #fff;
+	background-color: #b8b9b8;
+	box-shadow: 2px 2px #767776;
+	border: 0;
+	outline: 0;
+}
+
+#printingButton.print-button-active {
+    background-color: #093d70;
+	box-shadow: 2px 2px #032547;
+	cursor: pointer;
+}
+
+#printingButton p {
+	line-height: 40px;
+	margin: 0;
+}
+
+#printingButton.print-button-active:hover {
+	opacity: 0.8;
+}
+
+#printingButton.print-button-active:active {
+	opacity: 0.5;
+    box-shadow: none;
+}
