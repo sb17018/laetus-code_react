@@ -1,4 +1,4 @@
-label div, label input, .radio-wrapper{
+label div, label, .radio-wrapper{
     width: fit-content;
     display: inline-block;
     vertical-align: middle;
