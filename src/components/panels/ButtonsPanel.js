@@ -12,7 +12,6 @@ function ButtonsPanel() {
     const refBtn = useRef();
 
     function manipulateBars(event) {
-        console.log(refBtn);
         switch (event.currentTarget.id) {
             case "thickButton":
                 barsCombCtx.enterNextBar(event.currentTarget.id);
