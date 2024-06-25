@@ -17,7 +17,6 @@ function PrintPanel(props) {
 
     let codeSizeChosen = "STANDARD";
     function checkValue(event) {
-        console.log(event.target.value);
         codeSizeChosen = event.target.value;
     }
 
@@ -33,9 +32,8 @@ function PrintPanel(props) {
     }
 
     function clickFunction(ev) {
+        
         ev.preventDefault();
-
-        console.log(codeSizeChosen + " " + barsValue);
 
         fetch("http://localhost:8080/code",
             {

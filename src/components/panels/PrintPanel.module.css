@@ -1,16 +1,3 @@
-#printPanelWrapper{
-    /* width: 100%;
-    height: 180px;
-    position: relative;
-    background-color: transparent;
-    overflow: hidden;
-    transition: height .5s; */
-}
-
-/* #printPanelWrapper .panel-visible{
-    height: 180px;
-} */
-
 .print-panel{
     width: 100%;
     height: fit-content;
