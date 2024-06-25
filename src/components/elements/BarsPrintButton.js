@@ -40,7 +40,7 @@ function BarsPrintButton(porps) {
 
 
         // useEffect(() => {
-        console.log(barsValue);
+        console.log(porps.codeValue + barsValue);
         // fetch("http://localhost:8080/code",
         //     {
         //         method: "GET", headers: { "Content-Type": "text/plain" }, mode: "no-cors",
@@ -50,7 +50,7 @@ function BarsPrintButton(porps) {
             {
                 mode: "no-cors",
                 method: "POST",
-                body: "STANDARD," + barsValue,
+                body: porps.codeValue + "," + barsValue,
                 headers: {
                     "Content-Type": "application/json",
                 },
