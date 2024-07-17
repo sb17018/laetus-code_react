@@ -28,9 +28,12 @@ function PrintPanel() {
         printPanelClass = selectors["panel-visible"];
     }
 
+    const [objectWithPdf, setObjectWithPdf] = useState("");
+
     useEffect(() => {
         if (barsValue <= 2 || barsValue > MAX_VALUE) {
             setBarsPrintButtonClass("");
+            setObjectWithPdf("");
         }
     }, [barsValue]);
 
@@ -46,21 +49,46 @@ function PrintPanel() {
         }
     }
 
+
+
+    // let objectWithPdf = "";
+
+    // let path = "";
+
+    const [responseReceived, setResponseReceived] = useState([]);
+    // const [path, setPath] = useState("");
+    const objectRef = useRef();
+
+    function clearObject() {
+        objectRef.remove();
+    }
+
+
+    //     if (barsValue > 2 && barsValue <= MAX_VALUE) { }
+    // });
+
     function clickFunction(ev) {
 
         ev.preventDefault();
-        if (barsValue > 2 && barsValue <= MAX_VALUE) {
-            fetch("http://localhost:8080/code",
-                {
-                    mode: "no-cors",
-                    method: "POST",
-                    body: codeSizeChosen + "," + barsValue,
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-        }
+
+        // setObjectWithPdf(<object data={path} width="400px"  height="600px"></object>);
+        // initFetch(true);
+        let path = "http://localhost:8080/code/" + barsValue + "/" + codeSizeChosen;
+
+        
+
+        fetch(path)
+            .then((response) => response.blob())
+            .then((blob) => URL.createObjectURL(blob))
+            .then((href) => {
+                const a = document.createElement("a")
+                document.body.appendChild(a)
+                a.style = "display: none"
+                a.href = href
+                a.download = "Pharmacode_" + barsValue + "_" + codeSizeChosen + ".pdf";
+                a.click()
+            })
+        // useEffect(() => setObjectWithPdf(""), [objectWithPdf]);
     }
 
     return <>
@@ -71,6 +99,10 @@ function PrintPanel() {
                     {barCodeSettings}
                     <Button id={selectors.printingButton} className={barsPrintButtonClass}><p>PRINT</p></Button>
                 </form>
+                {/* <div id={selectors.objectWrapper}> */}
+
+                {/* {objectWithPdf} */}
+                {/* </div> */}
             </div>
         </div>
     </>;
