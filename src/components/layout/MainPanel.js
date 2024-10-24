@@ -10,12 +10,15 @@ import selectors from "./MainPanel.module.css";
 
 function MainPanel() {
 
+    const MIN_VALUE = 2;
+    const MAX_VALUE = 131070;
+
     const barsCombCtx = useContext(BarGenerationCtx);
 
     const barsValue = barsCombCtx.barsValue;
 
     let printPanelClass = "";
-    if (barsValue > 2 && barsValue <= 131070) {
+    if (barsValue > MIN_VALUE && barsValue <= MAX_VALUE) {
         printPanelClass = <PrintPanel className="panel-visible"/>
     }
 
