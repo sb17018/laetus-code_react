@@ -41,17 +41,3 @@
 #calculationPlaceholder.code-number::after{
     content: "";
 }
-/* 
-#calculationPlaceholder.to-copy{
-	width: 30%;
-	color: white;
-	background-color: #eb6c3e;
-	padding: .2rem .4rem;
-	box-shadow: 0 0 .4rem .4rem rgb(139, 48, 15, 0.6);
-}
-
-#calculationPlaceholder.code-number::selection{
-	color: white;
-	background-color: #eb6c3e;
-
-} */
