@@ -45,7 +45,7 @@ function PrintPanel() {
     </div>;
 
     function activatePrintBtn() {
-        if (barsValue > 2 && barsValue <= MAX_VALUE) {
+        if (barsValue > MIN_VALUE && barsValue <= MAX_VALUE) {
             setBarsPrintButtonClass(selectors["print-button-active"]);
         }
     }
@@ -53,21 +53,23 @@ function PrintPanel() {
     function clickFunction(ev) {
 
         ev.preventDefault();
+        if (barsValue > MIN_VALUE && barsValue <= MAX_VALUE) {
 
-        let path = "http://192.168.0.60:8080/code/" + barsValue + "/" + codeSizeChosen;
+            let path = "http://192.168.0.60:8080/code/" + barsValue + "/" + codeSizeChosen;
 
-        fetch(path)
-            .then((response) => response.blob())
-            .then((blob) => URL.createObjectURL(blob))
-            .then((href) => {
-                const a = document.createElement("a");
-                document.body.appendChild(a)
-                a.style = "display: none"
-                a.href = href;
-                a.download = "Pharmacode_" + barsValue + "_" + codeSizeChosen + ".pdf";
-                a.click();
-                a.remove();
-            })
+            fetch(path)
+                .then((response) => response.blob())
+                .then((blob) => URL.createObjectURL(blob))
+                .then((href) => {
+                    const a = document.createElement("a");
+                    document.body.appendChild(a)
+                    a.style = "display: none"
+                    a.href = href;
+                    a.download = "Pharmacode_" + barsValue + "_" + codeSizeChosen + ".pdf";
+                    a.click();
+                    a.remove();
+                })
+        }
     }
 
     return <>
