@@ -9,23 +9,45 @@ const BarGenerationCtx = createContext({
 
     eachBarParams: [],
     barsValue: 0,
+    isValueTooHigh: false,
     enterNextBar: () => { },
     removeLastBar: () => { },
     removeAllBars: () => { },
     generateCode: () => { },
+    setPrompt: () => { },
+    prompt: false,
 });
 
 let barsCalculatedValue = 0;
+//let isBarsValueTooHigh = false;
 
 export function BarGenerationCtxProvider(props) {
     const [barsCombination, setBarsCombination] = useState([]);
+    const [upperPrompt, setUpperPrompt] = useState(false);
+
+    const MAX_VALUE = 131070;
+
+    function setPromptHandler(codeValue){
+        if(codeValue > MAX_VALUE){
+            setUpperPrompt(true);
+        }
+        else{
+            setUpperPrompt(false);
+        }
+    }
 
     // to add a bar
     function enterNextBarHandler(barType) {
         if (barsCombination.length < 16) {
             let newBar = setBarParams(barType);
-            setBarsCombination((currentBarsCombination) => { return currentBarsCombination.concat(newBar) });
+            barsCombination.push(newBar);
+           // isBarsValueTooHigh = false;
         }
+        else{
+           // isBarsValueTooHigh = true;
+        }
+        let generatedBarsCombination = [...barsCombination];
+        setBarsCombination(() => { return generatedBarsCombination });
     };
 
     function setBarParams(barType) {
@@ -51,20 +73,24 @@ export function BarGenerationCtxProvider(props) {
 
     // to remove a last bar
     function removeLastBarHandler() {
+        if (barsCalculatedValue < MAX_VALUE) {
+           // isBarsValueTooHigh = false;
+        }
         if (barsCombination.length > 0) {
-            let currentBarsCombination = [...barsCombination];
-            let lastBar = currentBarsCombination.pop();
+            let lastBar = barsCombination.pop();
             if (lastBar.thick) {
                 --barsCalculatedValue;
             }
             barsCalculatedValue = (--barsCalculatedValue) / 2;
-            setBarsCombination(() => currentBarsCombination);
+            let generatedBarsCombination = [...barsCombination];
+            setBarsCombination(() => generatedBarsCombination);
         }
     };
 
     // to remove all bars
     function removeAllBarsHandler() {
         if (barsCombination.length > 0) {
+           // isBarsValueTooHigh = false;
             barsCalculatedValue = 0;
             setBarsCombination(() => []);
         }
@@ -73,10 +99,8 @@ export function BarGenerationCtxProvider(props) {
     function generateCodeHandler(codeValue) {
 
         let generatedBarsCombination = [];
-        if (codeValue > 131070) {
-            generatedBarsCombination = [...barsCombination];
-        }
-        else {
+       // isBarsValueTooHigh = false;
+        if (codeValue <= MAX_VALUE) {
             barsCombination.splice(0, barsCombination.length);
 
             let numberOfBars = parseInt(Math.log2(parseInt(codeValue) + 1));
@@ -98,11 +122,14 @@ export function BarGenerationCtxProvider(props) {
                 }
                 let newBar = setBarParams(barType);
                 barsCombination.push(newBar);
-                generatedBarsCombination = [...barsCombination];
             }
+            barsCalculatedValue = codeValue;
         }
-        barsCalculatedValue = codeValue;
-        setBarsCombination((currentBarsCombination) => { return generatedBarsCombination });
+        else{
+           // isBarsValueTooHigh = true;
+        }
+        generatedBarsCombination = [...barsCombination];
+        setBarsCombination(() => { return generatedBarsCombination });
     }
 
     const context = {
@@ -113,10 +140,13 @@ export function BarGenerationCtxProvider(props) {
         modul: 10,
         eachBarParams: barsCombination,
         barsValue: barsCalculatedValue,
+        //isValueTooHigh: isBarsValueTooHigh,
         enterNextBar: enterNextBarHandler,
         removeLastBar: removeLastBarHandler,
         removeAllBars: removeAllBarsHandler,
         generateCode: generateCodeHandler,
+        setPrompt: setPromptHandler,
+        prompt: upperPrompt,
     };
     return <BarGenerationCtx.Provider value={context}>{props.children}</BarGenerationCtx.Provider>;
 };

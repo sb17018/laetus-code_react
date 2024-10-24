@@ -1,22 +1,24 @@
 #userInputField {
-    width: 100%;
-    max-width: 320px;
-    height: 40px;
-    margin: 0;
-    text-align: center;
-    font-size: 34px;
-    color: #777788;
-    background-color: #ddddff;
-    outline: 0;
+  width: 100%;
+  max-width: 320px;
+  height: 40px;
+  margin: 0;
+  text-align: center;
+  font-size: 34px;
+  color: #777788;
+  background-color: #ddddff;
+  outline: 0;
 }
 
-#userInputField:placeholder-shown, .code-number {
-    font-size: 20px;
-    font-weight: bold;
+#userInputField:placeholder-shown,
+.code-number {
+  font-size: 20px;
+  font-weight: bold;
 }
 
-#userInputField::placeholder, .code-number {
-    color: #bb3300;
+#userInputField::placeholder,
+.code-number {
+  color: #bb3300;
 }
 
 /* Chrome, Safari, Edge, Opera */
