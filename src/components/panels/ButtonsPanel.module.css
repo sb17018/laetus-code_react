@@ -1,105 +1,114 @@
 #buttonPanelWrapper {
-	position: relative;
-	padding-top: 20px;
+    position: relative;
+    padding-top: 20px;
 }
 
 #divisionLineLeft,
 #divisionLineRight {
-	width: 45%;
-	position: absolute;	
-	/* top: 4px; */
+    width: 45%;
+    position: absolute;
 }
 
 #divisionLineLeft {
-	left: 0;
+    left: 0;
 }
 
 #divisionLineRight {
-	right: 0;
+    right: 0;
 }
 
 #connectorOR {
-	position: absolute;
-	margin: 3px 0;
-	padding: 0 5px;
-	font-weight: bold;
-	left: calc(50% - 15px);
+    position: absolute;
+    margin: 3px 0;
+    padding: 0 5px;
+    font-weight: bold;
+    left: calc(50% - 15px);
 }
 
 .button-panel {
-	width: 40%;
-	display: inline-block;
+    width: 40%;
+    display: inline-block;
+    margin: 0 auto; /* Center the button panels */
 }
 
+
 .button-panel.left .editing-button {
-	margin: 10px 15px 0 auto;
+    margin: 10px 15px 0 auto;
 }
 
 .button-panel.right .editing-button {
-	margin: 10px auto 0 15px;
+    margin: 10px auto 0 15px;
 }
 
 .editing-button {
-	width: 120px;
-	height: 40px;
-	margin: 10px auto;
-	padding: 2px;
-	text-align: center;
-	font-size: 20px;
-	color: #fff;
-	box-shadow: 2px 2px #0f4e03;
-	border: 0;
-	outline: 0;
-	cursor: pointer;
+    width: 100%; /* Use full width of the parent */
+    max-width: 120px; /* Set a max width */
+    height: 40px;
+    margin: 10px auto;
+    padding: 2px;
+    text-align: center;
+    font-size: 2vw; /* Responsive font size */
+    color: #fff;
+    box-shadow: 2px 2px #0f4e03;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 600px) {
+    .editing-button {
+        font-size: 16px; /* Smaller font size */
+    }
 }
 
 .editing-button p {
-	line-height: 40px;
-	margin: 0;
+    line-height: 40px;
+    margin: 0;
 }
 
 .editing-button:hover {
-	opacity: 0.8;
+    opacity: 0.8;
 }
 
 .editing-button:active {
-	opacity: 0.5;
-	box-shadow: none;
+    opacity: 0.5;
+    box-shadow: none;
 }
 
 .remove-last-button {
-	background-color: #c9b027;
-	box-shadow: 2px 2px #554907;
+    background-color: #c9b027;
+    box-shadow: 2px 2px #554907;
 }
 
 .clear-all-button {
-	background-color: #bb2500;
-	box-shadow: 2px 2px #6b1803;
+    background-color: #bb2500;
+    box-shadow: 2px 2px #6b1803;
 }
 
 .bar-button {
-	background-color: #198105;
+    background-color: #198105;
 }
 
 .bar-button-inactive,
 .bar-button-inactive:hover {
-	background-color: #b8b9b8;
-	opacity: 0.5;
-	box-shadow: 2px 2px #767776;
-	cursor: default;
+    background-color: #b8b9b8;
+    opacity: 0.5;
+    box-shadow: 2px 2px #767776;
+    cursor: default;
 }
 
 #thickButton,
 #thinButton {
-	background-color: #000;
-	height: 100%;
-	margin: 0 auto;
+    background-color: #000;
+    height: 100%;
+    margin: 0 auto;
 }
 
 #thickButton {
-	width: 20px;
+    width: 20px;
 }
 
 #thinButton {
-	width: 10px;
+    width: 10px;
 }

@@ -8,3 +8,19 @@
 	border: 2px solid #093d70;
 	z-index: 2;
 }
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 768px) {
+	#mainField {
+		min-width: 300px; /* Adjust as needed */
+		padding: 15px 30px;
+	}
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+	#mainField {
+		width: 100%; /* Make it full width */
+		padding: 10px 20px;
+	}
+}

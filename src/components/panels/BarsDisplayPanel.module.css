@@ -9,20 +9,34 @@
 }
 
 #calculationPlaceholderFrame {
-	height: 30px;
-	font-size: 20px;
-	color: #8f3c1e;
-	margin: 20px 0 40px;
+  height: auto; /* Allow height to adjust based on content */
+  color: #8f3c1e;
+  margin: 20px 0 40px;
 }
 
-#calculationPlaceholder{
-    padding: 5px 8px;
-    color: #fff;
-    background-color: #bb3300;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
+#calculationPlaceholder {
+  padding: 8px 12px; /* Responsive padding */
+  color: #fff;
+  background-color: #bb3300;
+  font-size: 2vw; /* Responsive font size */
+  font-weight: bold;
+  border-radius: 5px;
 }
+
+/* Media query for larger screens */
+@media (min-width: 600px) {
+  #calculationPlaceholder {
+      padding: 5px 8px; /* Standard padding for larger screens */
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 400px) {
+  #calculationPlaceholder {
+      padding: 4px 6px; /* Adjust padding for smaller screens */
+  }
+}
+
 
 #calculationPlaceholder::after{
     content: "REQUIRED TWO BARS AT LEAST";
