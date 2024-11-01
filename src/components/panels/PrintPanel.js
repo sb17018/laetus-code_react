@@ -55,7 +55,8 @@ function PrintPanel() {
         ev.preventDefault();
         if (barsValue > MIN_VALUE && barsValue <= MAX_VALUE) {
 
-            let path = "http://192.168.0.60:8080/code/" + barsValue + "/" + codeSizeChosen;
+            // Generating PDF microservice url
+            let path = "http://10.0.2.15:8080/code/" + barsValue + "/" + codeSizeChosen;
 
             fetch(path)
                 .then((response) => response.blob())
