@@ -56,6 +56,7 @@ function PrintPanel() {
         if (barsValue > MIN_VALUE && barsValue <= MAX_VALUE) {
 
             // Generating PDF microservice url
+            // let path = "http://localhost:8080/code/" + barsValue + "/" + codeSizeChosen;
             let path = "http://10.0.2.15:8080/code/" + barsValue + "/" + codeSizeChosen;
 
             fetch(path)

@@ -47,19 +47,12 @@
     margin: 10px auto;
     padding: 2px;
     text-align: center;
-    font-size: 2vw; /* Responsive font size */
+    font-size: 100%; /* Responsive font size */
     color: #fff;
     box-shadow: 2px 2px #0f4e03;
     border: 0;
     outline: 0;
     cursor: pointer;
-}
-
-/* Adjust font size for smaller screens */
-@media (max-width: 600px) {
-    .editing-button {
-        font-size: 16px; /* Smaller font size */
-    }
 }
 
 .editing-button p {
@@ -111,4 +104,11 @@
 
 #thinButton {
     width: 10px;
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 600px) {
+    .editing-button {
+        font-size: 16px; /* Smaller font size */
+    }
 }
