@@ -1,3 +1,7 @@
+#root{
+	min-width: 320px;
+}	
+	
 body {
 	margin: 0;
 	background-image: url("./img/packaging_big.jpg");
@@ -7,4 +11,18 @@ body {
 	background-size: cover;
 	font-family: Helvetica, sans-serif;
 	color: #093d70;
+}
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 768px) {
+	#root {
+		min-width: 300px; /* Adjust as needed */
+	}
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+	#root {
+		width: 100%; /* Make it full width */
+	}
 }

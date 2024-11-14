@@ -5,16 +5,18 @@
     margin: 0 auto;
     padding: 20px; /* Use uniform padding */
     text-align: center;
-    font-size: 2vw; /* Use viewport width for responsive font size */
 }
 
+#headerField h3{
+    font-size: calc(14px + 1vw);  /*Use viewport width for responsive font size */
+}
 
 /* Media query for larger screens */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     #headerField {
 		min-width: 300px; /* Adjust as needed */
         padding: 20px 40px; /* Adjust padding for larger screens */
-        font-size: 18px; /* Set a fixed font size for larger screens */
+       
     }
 }
 
@@ -22,8 +24,9 @@
 /* Media query for smaller screens */
 @media (max-width: 480px) {
     #headerField {
-		width: 100%; /* Make it full width */
         padding: 15px; /* Reduce padding for smaller screens */
-        font-size: 16px; /* Slightly smaller font size for very small screens */
+    }
+    #headerField h3{
+        font-size: 14px; /* Slightly smaller font size for very small screens */
     }
 }

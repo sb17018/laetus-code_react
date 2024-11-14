@@ -6,6 +6,8 @@ import InputRadio from "../elements/RadioModuleOption";
 
 import selectors from "./PrintPanel.module.css";
 
+import axios from 'axios';
+
 function PrintPanel() {
 
     const MIN_VALUE = 2;
@@ -57,20 +59,31 @@ function PrintPanel() {
 
             // Generating PDF microservice url
             // let path = "http://localhost:8080/code/" + barsValue + "/" + codeSizeChosen;
-            let path = "http://10.0.2.15:8080/code/" + barsValue + "/" + codeSizeChosen;
+            let path = "http://192.168.0.208:8080/code/" + barsValue + "/" + codeSizeChosen;
 
-            fetch(path)
-                .then((response) => response.blob())
-                .then((blob) => URL.createObjectURL(blob))
-                .then((href) => {
-                    const a = document.createElement("a");
-                    document.body.appendChild(a)
-                    a.style = "display: none"
-                    a.href = href;
-                    a.download = "Pharmacode_" + barsValue + "_" + codeSizeChosen + ".pdf";
-                    a.click();
-                    a.remove();
-                })
+            let fileName = "Pharmacode_" + barsValue + "_" + codeSizeChosen;
+
+
+            const config = { responseType: 'blob' };
+            axios.get(path, config).then(response => {
+                console.log(response.data);
+                console.log(response.headers["content-disposition"]);
+                // response.data.pipe(fs.createWriteStream(fileName));
+                const HREF = URL.createObjectURL(response.data);
+      
+                // create "a" HTML element with href to file & click
+                const link = document.createElement('a');
+                link.href = HREF;
+                link.setAttribute('download', fileName); //or any other extension
+                link.setAttribute('target', '_blank'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+
+                // clean up "a" element & remove ObjectURL
+                document.body.removeChild(link);
+                URL.revokeObjectURL(HREF);
+            });
+
         }
     }
 

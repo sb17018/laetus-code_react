@@ -32,3 +32,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+  #userInputField {
+    width: fit-content;
+  }
+}
